@@ -24,8 +24,8 @@
       <div class="navlinks">
         <a href="#como">Como funciona</a>
         <a href="#animais">Animais</a>
-        <a href="#porque">Por que entrevista</a>
-        <a href="#adotar" class="btn btn-coral">Quero adotar</a>
+        <a href="#cadastro">Quero adotar</a>
+        <a href="#cadastro" class="btn btn-coral">Encontrar meu match</a>
       </div>
     </nav>
   </div>
@@ -39,7 +39,7 @@
       <h1>A adoção certa <em>dura a vida toda</em>.</h1>
       <p class="lead">O GuaraPet reúne os animais para adoção da cidade em um só lugar — e cuida para que cada um vá para um lar onde realmente vai se dar bem.</p>
       <div class="hero-cta">
-        <a href="#animais" class="btn btn-coral">Ver animais</a>
+        <a href="#cadastro" class="btn btn-coral">Encontrar meu match</a>
         <a href="#como" class="btn btn-ghost">Como funciona</a>
       </div>
       <div class="hero-stats">
@@ -85,12 +85,12 @@
     <div class="sec-head">
       <span class="tag">Para adoção</span>
       <h2>Conheça quem está esperando.</h2>
-      <p>Cada ficha mostra de cara o que importa para uma adoção feliz. Toque em um animal para ver a história completa e iniciar a entrevista.</p>
+      <p>Cada ficha mostra o que importa para uma adoção feliz. Toque em um animal para ver a história completa.</p>
     </div>
     <div class="filtros" id="filtros">
       <button class="chip ativo" data-f="todos">Todos</button>
-      <button class="chip" data-f="cao">Cães</button>
-      <button class="chip" data-f="gato">Gatos</button>
+      <button class="chip" data-f="CAO">Cães</button>
+      <button class="chip" data-f="GATO">Gatos</button>
     </div>
     <div class="grid-animais" id="grid"></div>
   </div>
@@ -116,8 +116,163 @@
   <div class="wrap">
     <div class="cta-box">
       <h2>Pronto para mudar uma vida?</h2>
-      <p>Escolha um animal, responda a entrevista e dê o primeiro passo para uma adoção que dura para sempre.</p>
-      <a href="#animais" class="btn btn-mel">Encontrar meu novo amigo</a>
+      <p>Diga quem você é e o que procura — vamos encontrar o animal certo para o seu lar.</p>
+      <a href="#cadastro" class="btn btn-mel">Encontrar meu match 🐾</a>
+    </div>
+  </div>
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastro">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Seu match</span>
+      <h2>Qual animal combina com você?</h2>
+      <p>Preencha seus dados e preferências — mostramos os animais disponíveis que se encaixam no seu perfil.</p>
+    </div>
+
+    <div class="form-box">
+      <!-- Stepper -->
+      <div class="stepper-wrap">
+        <div class="step-item ativo" id="si-1">
+          <div class="step-num">1</div>
+          <span>Seus dados</span>
+        </div>
+        <div class="step-bar" id="bar-1"></div>
+        <div class="step-item" id="si-2">
+          <div class="step-num">2</div>
+          <span>Preferências</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: dados pessoais → guarapet_interessados -->
+      <div class="form-step ativo" id="step-1">
+        <div class="form-grid">
+          <div class="campo span-2">
+            <label>Nome completo *</label>
+            <input type="text" id="c-nome" placeholder="Seu nome completo">
+            <span class="erro-msg">Por favor, informe seu nome.</span>
+          </div>
+          <div class="campo">
+            <label>CPF</label>
+            <input type="text" id="c-cpf" placeholder="000.000.000-00" maxlength="14">
+          </div>
+          <div class="campo">
+            <label>Telefone</label>
+            <input type="text" id="c-tel" placeholder="(00) 00000-0000" maxlength="15">
+          </div>
+          <div class="campo span-2">
+            <label>E-mail *</label>
+            <input type="email" id="c-email" placeholder="seu@email.com">
+            <span class="erro-msg">Informe um e-mail válido.</span>
+          </div>
+          <div class="campo span-2">
+            <label>Endereço</label>
+            <input type="text" id="c-end" placeholder="Rua, número, bairro">
+          </div>
+          <div class="campo">
+            <label>Cidade</label>
+            <input type="text" id="c-cidade" placeholder="Guaratuba">
+          </div>
+          <div class="campo">
+            <label>Estado</label>
+            <select id="c-estado">
+              <option value="">Selecione</option>
+              <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+              <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+              <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+              <option>MG</option><option>PA</option><option>PB</option><option selected>PR</option>
+              <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+              <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+              <option>SP</option><option>SE</option><option>TO</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-nav">
+          <span></span>
+          <button class="btn btn-coral" onclick="irStep(2)">Preferências →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: preferências → preferencias_interessado -->
+      <div class="form-step" id="step-2">
+
+        <!-- especie: campo obrigatório -->
+        <div class="pref-bloco">
+          <span class="pref-label">Que tipo de animal você quer adotar? *</span>
+          <div class="card-radio-group">
+            <label class="card-radio">
+              <input type="radio" name="especie" value="CAO">
+              <div class="cr-inner">🐶<span>Cão</span></div>
+            </label>
+            <label class="card-radio">
+              <input type="radio" name="especie" value="GATO">
+              <div class="cr-inner">🐱<span>Gato</span></div>
+            </label>
+          </div>
+          <span class="erro-msg" id="err-especie" style="display:none;color:var(--coral);font-size:.8rem;margin-top:8px">Selecione cão ou gato.</span>
+        </div>
+
+        <div class="pref-grid">
+          <!-- sexo -->
+          <div class="pref-bloco">
+            <span class="pref-label">Sexo</span>
+            <div class="pill-radio-group">
+              <label class="pill-radio"><input type="radio" name="sexo" value="INDIFERENTE" checked><span>Indiferente</span></label>
+              <label class="pill-radio"><input type="radio" name="sexo" value="MACHO"><span>Macho</span></label>
+              <label class="pill-radio"><input type="radio" name="sexo" value="FEMEA"><span>Fêmea</span></label>
+            </div>
+          </div>
+          <!-- porte -->
+          <div class="pref-bloco">
+            <span class="pref-label">Porte</span>
+            <div class="pill-radio-group">
+              <label class="pill-radio"><input type="radio" name="porte" value="INDIFERENTE" checked><span>Indiferente</span></label>
+              <label class="pill-radio"><input type="radio" name="porte" value="PEQUENO"><span>Pequeno</span></label>
+              <label class="pill-radio"><input type="radio" name="porte" value="MEDIO"><span>Médio</span></label>
+              <label class="pill-radio"><input type="radio" name="porte" value="GRANDE"><span>Grande</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="campo">
+            <label>Raça (opcional)</label>
+            <input type="text" id="c-raca" placeholder="ex: SRD, Labrador, Siamês...">
+          </div>
+          <div class="campo">
+            <label>Cor (opcional)</label>
+            <input type="text" id="c-cor" placeholder="ex: caramelo, preto, branco...">
+          </div>
+          <div class="campo">
+            <label>Idade mínima (anos)</label>
+            <input type="number" id="c-idade-min" placeholder="0" min="0" max="20">
+          </div>
+          <div class="campo">
+            <label>Idade máxima (anos)</label>
+            <input type="number" id="c-idade-max" placeholder="20" min="0" max="20">
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn btn-ghost" onclick="irStep(1)">← Voltar</button>
+          <button class="btn btn-coral" onclick="buscarMatch()">Ver animais compatíveis 🐾</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resultados do match -->
+    <div id="resultados" style="display:none;margin-top:52px">
+      <div class="match-header">
+        <h3 id="match-titulo"></h3>
+        <p id="match-sub" style="color:var(--musgo);margin-top:4px"></p>
+      </div>
+      <div class="grid-animais" id="grid-match"></div>
+      <div class="match-vazio" id="match-vazio" style="display:none">
+        Nenhum animal disponível com essas preferências agora.
+        Tente ajustar os filtros ou
+        <a href="#animais">veja todos os animais</a>. 🐾
+      </div>
     </div>
   </div>
 </section>
@@ -131,7 +286,7 @@
         <p style="margin-top:12px;font-size:.9rem">Centralizando a adoção responsável de animais em Guaratuba, Paraná.</p>
       </div>
       <div class="foot-cols">
-        <div><h5>Plataforma</h5><a href="#como">Como funciona</a><a href="#animais">Animais</a><a href="#adotar">Adotar</a></div>
+        <div><h5>Plataforma</h5><a href="#como">Como funciona</a><a href="#animais">Animais</a><a href="#cadastro">Encontrar match</a></div>
         <div><h5>Ajudar</h5><a href="#">Cadastrar resgate</a><a href="#">Ser voluntário</a><a href="#">Doar</a></div>
         <div><h5>Contato</h5><a href="#">Instagram</a><a href="#">WhatsApp</a><a href="#">E-mail</a></div>
       </div>
@@ -155,14 +310,13 @@
       <p class="sub" id="m-sub"></p>
       <div class="tags" id="m-tags"></div>
       <div class="bloco"><h4>História</h4><p id="m-hist"></p></div>
-      <div class="bloco" id="m-nec-bloco"><h4>Precisa de</h4><p id="m-nec"></p></div>
-      <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="abrirForm()" id="btn-form">Iniciar entrevista</button>
-
+      <div class="bloco"><h4>Precisa de</h4><p id="m-nec"></p></div>
+      <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="abrirFormModal()" id="btn-form-modal">Tenho interesse</button>
       <div class="form-int" id="form-int">
-        <div class="campo"><label>Seu nome</label><input type="text" id="f-nome" placeholder="Nome completo"></div>
-        <div class="campo"><label>Tipo de moradia</label><select id="f-mora"><option>Casa com quintal</option><option>Casa sem quintal</option><option>Apartamento</option></select></div>
-        <div class="campo"><label>Você já tem outros animais?</label><select id="f-outros"><option>Não tenho</option><option>Sim, cães</option><option>Sim, gatos</option><option>Sim, cães e gatos</option></select></div>
-        <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="enviarForm()">Enviar pedido de entrevista</button>
+        <div class="campo-modal"><label>Seu nome</label><input type="text" id="f-nome" placeholder="Nome completo"></div>
+        <div class="campo-modal"><label>Tipo de moradia</label><select id="f-mora"><option>Casa com quintal</option><option>Casa sem quintal</option><option>Apartamento</option></select></div>
+        <div class="campo-modal"><label>Você já tem outros animais?</label><select id="f-outros"><option>Não tenho</option><option>Sim, cães</option><option>Sim, gatos</option><option>Sim, cães e gatos</option></select></div>
+        <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="enviarFormModal()">Enviar pedido de entrevista</button>
         <div class="form-msg" id="form-msg"></div>
       </div>
     </div>
@@ -170,41 +324,74 @@
 </div>
 
 <script>
-// "Banco" de animais — espelha os campos da modelagem (especie, porte, idade,
-// castrado, exige_castracao_adotante, aceita_outros_animais, necessidades, historico)
+// ─────────────────────────────────────────
+// DADOS — campos alinhados ao schema MySQL
+// especie: 'CAO'|'GATO'  (enum do banco)
+// porte:   'PEQUENO'|'MEDIO'|'GRANDE'
+// sexo:    'MACHO'|'FEMEA'
+// cor:     pelagem em texto livre
+// idade:   número inteiro (anos)
+// ─────────────────────────────────────────
 const animais = [
-  {nome:"Théo", especie:"cao", raca:"SRD (vira-lata)", porte:"medio", idade:"2 anos", sexo:"Macho",
-   castrado:true, exigeCastracao:false, aceitaOutros:"sim", cor:"#c98a4b",
-   necessidades:"Espaço para correr e passeios diários.",
-   historico:"Resgatado da orla, hoje é dócil e brincalhão. Convive bem com outros cães."},
-  {nome:"Mel", especie:"gato", raca:"SRD", porte:"pequeno", idade:"1 ano", sexo:"Fêmea",
-   castrado:true, exigeCastracao:false, aceitaOutros:"so_se_criado_junto", cor:"#e0b15f",
-   necessidades:"Janelas teladas — é curiosa e arisca com cães grandes.",
-   historico:"Encontrada filhote, cresceu sociável com gente, mas prefere ser a única gata da casa."},
-  {nome:"Bidu", especie:"cao", raca:"SRD pequeno", porte:"pequeno", idade:"4 anos", sexo:"Macho",
-   castrado:true, exigeCastracao:false, aceitaOutros:"sim", cor:"#8a7053",
-   necessidades:"Companhia — sofre quando fica sozinho muitas horas.",
-   historico:"Veio de uma casa com muitos animais. Calmo, ideal para apartamento."},
-  {nome:"Nina", especie:"gato", raca:"SRD", porte:"pequeno", idade:"6 meses", sexo:"Fêmea",
-   castrado:false, exigeCastracao:true, aceitaOutros:"sim", cor:"#5a5550",
-   necessidades:"Adotante se compromete com a castração ao atingir a idade.",
-   historico:"Filhote resgatada com os irmãos. Ainda nova para castrar, brinca com tudo."},
-  {nome:"Zeca", especie:"cao", raca:"SRD grande", porte:"grande", idade:"3 anos", sexo:"Macho",
-   castrado:true, exigeCastracao:false, aceitaOutros:"nao", cor:"#6b4f3a",
-   necessidades:"Quintal seguro e ser o único animal da casa. Visita obrigatória.",
-   historico:"Forte e leal, mas não aceita outros animais. Precisa de tutor experiente."},
-  {nome:"Pituca", especie:"gato", raca:"SRD", porte:"pequeno", idade:"3 anos", sexo:"Fêmea",
-   castrado:true, exigeCastracao:false, aceitaOutros:"sim", cor:"#d4cbbf",
-   necessidades:"Atenção e um cantinho tranquilo. Toma remédio para alergia.",
-   historico:"Foi devolvida uma vez por falta de informação. Desta vez, tudo às claras."},
+  {
+    nome:"Théo", especie:"CAO", raca:"SRD", porte:"MEDIO", idade:2, sexo:"MACHO",
+    cor:"caramelo", svgCor:"#c98a4b",
+    castrado:true, exigeCastracao:false, aceitaOutros:"sim",
+    necessidades:"Espaço para correr e passeios diários.",
+    historico:"Resgatado da orla, hoje é dócil e brincalhão. Convive bem com outros cães.",
+    status_adocao:"DISPONIVEL"
+  },
+  {
+    nome:"Mel", especie:"GATO", raca:"SRD", porte:"PEQUENO", idade:1, sexo:"FEMEA",
+    cor:"laranja", svgCor:"#e0b15f",
+    castrado:true, exigeCastracao:false, aceitaOutros:"so_se_criado_junto",
+    necessidades:"Janelas teladas — é curiosa e arisca com cães grandes.",
+    historico:"Encontrada filhote, cresceu sociável com gente, mas prefere ser a única gata.",
+    status_adocao:"DISPONIVEL"
+  },
+  {
+    nome:"Bidu", especie:"CAO", raca:"SRD", porte:"PEQUENO", idade:4, sexo:"MACHO",
+    cor:"marrom", svgCor:"#8a7053",
+    castrado:true, exigeCastracao:false, aceitaOutros:"sim",
+    necessidades:"Companhia — sofre quando fica sozinho muitas horas.",
+    historico:"Veio de uma casa com muitos animais. Calmo, ideal para apartamento.",
+    status_adocao:"DISPONIVEL"
+  },
+  {
+    nome:"Nina", especie:"GATO", raca:"SRD", porte:"PEQUENO", idade:0, sexo:"FEMEA",
+    cor:"cinza", svgCor:"#5a5550",
+    castrado:false, exigeCastracao:true, aceitaOutros:"sim",
+    necessidades:"Adotante se compromete com a castração ao atingir a idade.",
+    historico:"Filhote resgatada com os irmãos. Ainda nova para castrar, brinca com tudo.",
+    status_adocao:"DISPONIVEL"
+  },
+  {
+    nome:"Zeca", especie:"CAO", raca:"SRD grande", porte:"GRANDE", idade:3, sexo:"MACHO",
+    cor:"preto", svgCor:"#6b4f3a",
+    castrado:true, exigeCastracao:false, aceitaOutros:"nao",
+    necessidades:"Quintal seguro e ser o único animal da casa. Visita obrigatória.",
+    historico:"Forte e leal, mas não aceita outros animais. Precisa de tutor experiente.",
+    status_adocao:"DISPONIVEL"
+  },
+  {
+    nome:"Pituca", especie:"GATO", raca:"SRD", porte:"PEQUENO", idade:3, sexo:"FEMEA",
+    cor:"branco", svgCor:"#d4cbbf",
+    castrado:true, exigeCastracao:false, aceitaOutros:"sim",
+    necessidades:"Atenção e um cantinho tranquilo. Toma remédio para alergia.",
+    historico:"Foi devolvida uma vez por falta de informação. Desta vez, tudo às claras.",
+    status_adocao:"DISPONIVEL"
+  },
 ];
 
+// ─── SVG ilustrativo por espécie ────────
 function svgPet(especie, cor){
-  if(especie==="gato"){
+  if(especie === "GATO"){
     return `<svg width="120" height="120" viewBox="0 0 120 120">
       <ellipse cx="60" cy="74" rx="36" ry="32" fill="${cor}"/>
-      <path d="M30 50 L26 26 L48 42 Z" fill="${cor}"/><path d="M90 50 L94 26 L72 42 Z" fill="${cor}"/>
-      <circle cx="48" cy="70" r="5" fill="#26201b"/><circle cx="72" cy="70" r="5" fill="#26201b"/>
+      <path d="M30 50 L26 26 L48 42 Z" fill="${cor}"/>
+      <path d="M90 50 L94 26 L72 42 Z" fill="${cor}"/>
+      <circle cx="48" cy="70" r="5" fill="#26201b"/>
+      <circle cx="72" cy="70" r="5" fill="#26201b"/>
       <path d="M56 82 q4 4 8 0" stroke="#26201b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       <path d="M60 78 l-2 4 4 0 z" fill="#b5675a"/>
     </svg>`;
@@ -213,83 +400,243 @@ function svgPet(especie, cor){
     <ellipse cx="60" cy="72" rx="38" ry="33" fill="${cor}"/>
     <ellipse cx="28" cy="58" rx="11" ry="20" fill="${cor}" transform="rotate(-18 28 58)"/>
     <ellipse cx="92" cy="58" rx="11" ry="20" fill="${cor}" transform="rotate(18 92 58)"/>
-    <circle cx="48" cy="68" r="5" fill="#26201b"/><circle cx="72" cy="68" r="5" fill="#26201b"/>
+    <circle cx="48" cy="68" r="5" fill="#26201b"/>
+    <circle cx="72" cy="68" r="5" fill="#26201b"/>
     <ellipse cx="60" cy="82" rx="9" ry="7" fill="#3a2c22"/>
     <ellipse cx="60" cy="80" rx="4" ry="3" fill="#26201b"/>
   </svg>`;
 }
 
+// ─── Tags de compatibilidade ─────────────
 function tagsDe(a){
-  let t = [];
-  if(a.castrado) t.push(`<span class="t t-verde">✓ Castrado</span>`);
-  else if(a.exigeCastracao) t.push(`<span class="t t-mel">Castração ao crescer</span>`);
-  t.push(`<span class="t t-verde">${a.porte==="grande"?"Porte grande":a.porte==="medio"?"Porte médio":"Porte pequeno"}</span>`);
-  const m = {sim:`<span class="t t-verde">🐾 Convive bem</span>`,
-             so_se_criado_junto:`<span class="t t-mel">Só animal único</span>`,
-             nao:`<span class="t t-coral">⚠ Único da casa</span>`};
-  t.push(m[a.aceitaOutros]);
-  return t.join("");
+  const tags = [];
+  if(a.castrado)          tags.push(`<span class="t t-verde">✓ Castrado</span>`);
+  else if(a.exigeCastracao) tags.push(`<span class="t t-mel">Castração ao crescer</span>`);
+  const porteLabel = {PEQUENO:"Porte pequeno", MEDIO:"Porte médio", GRANDE:"Porte grande"};
+  tags.push(`<span class="t t-verde">${porteLabel[a.porte]}</span>`);
+  const conv = {
+    sim:`<span class="t t-verde">🐾 Convive bem</span>`,
+    so_se_criado_junto:`<span class="t t-mel">Prefere ser único</span>`,
+    nao:`<span class="t t-coral">⚠ Único da casa</span>`
+  };
+  tags.push(conv[a.aceitaOutros]);
+  return tags.join("");
 }
 
+// ─── Card HTML ───────────────────────────
+function cardHTML(a, idx){
+  const bg = a.especie === "GATO" ? "#f0ece2" : "#eef2ec";
+  const label = a.especie === "GATO" ? "🐱 Gato" : "🐶 Cão";
+  return `<article class="card" onclick="abrirModal(${idx})">
+    <div class="retrato" style="background:${bg}">
+      <span class="selo">${label}</span>
+      ${svgPet(a.especie, a.svgCor)}
+    </div>
+    <div class="corpo">
+      <h3>${a.nome}</h3>
+      <p class="meta">${a.raca} · ${a.idade === 0 ? "filhote" : a.idade + " ano" + (a.idade > 1 ? "s" : "")} · ${a.sexo === "MACHO" ? "Macho" : "Fêmea"}</p>
+      <div class="tags">${tagsDe(a)}</div>
+    </div>
+  </article>`;
+}
+
+// ─── Grid principal ───────────────────────
 const grid = document.getElementById("grid");
-let filtro = "todos";
+let filtroAtivo = "todos";
 
 function render(){
-  const lista = animais.filter(a => filtro==="todos" || a.especie===filtro);
-  if(!lista.length){ grid.innerHTML = `<div class="vazio">Nenhum animal nesta categoria por enquanto. 🐾</div>`; return; }
-  grid.innerHTML = lista.map((a)=>{
-    const idx = animais.indexOf(a);
-    return `<article class="card" onclick="abrirModal(${idx})">
-      <div class="retrato" style="background:${a.especie==='gato'?'#f0ece2':'#eef2ec'}">
-        <span class="selo">${a.especie==='gato'?'🐱 Gato':'🐶 Cão'}</span>
-        ${svgPet(a.especie,a.cor)}
-      </div>
-      <div class="corpo">
-        <h3>${a.nome}</h3>
-        <p class="meta">${a.raca} · ${a.idade} · ${a.sexo}</p>
-        <div class="tags">${tagsDe(a)}</div>
-      </div>
-    </article>`;
-  }).join("");
+  const lista = filtroAtivo === "todos"
+    ? animais
+    : animais.filter(a => a.especie === filtroAtivo);
+  grid.innerHTML = lista.length
+    ? lista.map(a => cardHTML(a, animais.indexOf(a))).join("")
+    : `<div class="vazio">Nenhum animal nesta categoria por enquanto. 🐾</div>`;
 }
 
-document.getElementById("filtros").addEventListener("click",e=>{
+document.getElementById("filtros").addEventListener("click", e => {
   if(!e.target.classList.contains("chip")) return;
-  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("ativo"));
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("ativo"));
   e.target.classList.add("ativo");
-  filtro = e.target.dataset.f;
+  filtroAtivo = e.target.dataset.f;
   render();
 });
 
-// MODAL
-let atual = null;
+// ─── Modal ───────────────────────────────
+let animalAtual = null;
+
 function abrirModal(i){
-  const a = animais[i]; atual = a;
-  document.getElementById("m-svg").innerHTML = svgPet(a.especie, a.cor);
-  document.getElementById("m-topo").style.background = a.especie==='gato'?'#f0ece2':'#eef2ec';
+  const a = animais[i];
+  animalAtual = a;
+  const bg = a.especie === "GATO" ? "#f0ece2" : "#eef2ec";
+  document.getElementById("m-svg").innerHTML = svgPet(a.especie, a.svgCor);
+  document.getElementById("m-topo").style.background = bg;
   document.getElementById("m-nome").textContent = a.nome;
-  document.getElementById("m-sub").textContent = `${a.raca} · ${a.idade} · ${a.sexo}`;
+  document.getElementById("m-sub").textContent =
+    `${a.raca} · ${a.idade === 0 ? "Filhote" : a.idade + " ano" + (a.idade > 1 ? "s" : "")} · ${a.sexo === "MACHO" ? "Macho" : "Fêmea"}`;
   document.getElementById("m-tags").innerHTML = tagsDe(a);
   document.getElementById("m-hist").textContent = a.historico;
   document.getElementById("m-nec").textContent = a.necessidades;
   document.getElementById("form-int").classList.remove("aberto");
-  document.getElementById("form-msg").style.display="none";
-  document.getElementById("btn-form").style.display="inline-flex";
+  document.getElementById("form-msg").style.display = "none";
+  document.getElementById("btn-form-modal").style.display = "inline-flex";
   document.getElementById("modal").classList.add("aberto");
-  document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 }
-function fecharModal(){ document.getElementById("modal").classList.remove("aberto"); document.body.style.overflow=""; }
-function abrirForm(){ document.getElementById("form-int").classList.add("aberto"); document.getElementById("btn-form").style.display="none"; }
-function enviarForm(){
+
+function fecharModal(){
+  document.getElementById("modal").classList.remove("aberto");
+  document.body.style.overflow = "";
+}
+
+function abrirFormModal(){
+  document.getElementById("form-int").classList.add("aberto");
+  document.getElementById("btn-form-modal").style.display = "none";
+}
+
+function enviarFormModal(){
   const nome = document.getElementById("f-nome").value.trim() || "Visitante";
   const msg = document.getElementById("form-msg");
-  msg.style.display="block";
-  msg.textContent = `Obrigado, ${nome}! Seu interesse por ${atual.nome} foi registrado. A equipe entrará em contato para agendar a entrevista. 🐾`;
+  msg.style.display = "block";
+  msg.textContent = `Obrigado, ${nome}! Seu interesse por ${animalAtual.nome} foi registrado. A equipe entrará em contato para agendar a entrevista. 🐾`;
 }
-document.getElementById("modal").addEventListener("click",e=>{ if(e.target.id==="modal") fecharModal(); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") fecharModal(); });
 
-// stat
+document.getElementById("modal").addEventListener("click", e => {
+  if(e.target.id === "modal") fecharModal();
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") fecharModal();
+});
+
+// ─────────────────────────────────────────
+// FORMULÁRIO DE CADASTRO / MATCHING
+// ─────────────────────────────────────────
+
+// Stepper: navegar entre steps
+function irStep(n){
+  if(n === 2 && !validarStep1()) return;
+
+  document.querySelectorAll(".form-step").forEach(s => s.classList.remove("ativo"));
+  document.getElementById(`step-${n}`).classList.add("ativo");
+
+  document.querySelectorAll(".step-item").forEach((si, i) => {
+    si.classList.remove("ativo","concluido");
+    if(i + 1 < n)  si.classList.add("concluido");
+    if(i + 1 === n) si.classList.add("ativo");
+  });
+
+  const bar = document.getElementById("bar-1");
+  if(bar) bar.classList.toggle("ativo", n === 2);
+}
+
+// Validação step 1
+function validarStep1(){
+  let ok = true;
+  const nome  = document.getElementById("c-nome");
+  const email = document.getElementById("c-email");
+
+  [nome, email].forEach(el => {
+    el.closest(".campo").classList.remove("tem-erro");
+  });
+
+  if(!nome.value.trim()){
+    nome.closest(".campo").classList.add("tem-erro");
+    ok = false;
+  }
+  if(!email.value.trim() || !email.value.includes("@")){
+    email.closest(".campo").classList.add("tem-erro");
+    ok = false;
+  }
+  return ok;
+}
+
+// Algoritmo de match — espelha a lógica de preferencias_interessado
+function matchAnimais(prefs){
+  return animais.filter(a => {
+    if(a.status_adocao !== "DISPONIVEL") return false;
+
+    // especie: obrigatório
+    if(prefs.especie && a.especie !== prefs.especie) return false;
+
+    // sexo: INDIFERENTE passa tudo
+    if(prefs.sexo && prefs.sexo !== "INDIFERENTE" && a.sexo !== prefs.sexo) return false;
+
+    // porte: INDIFERENTE passa tudo
+    if(prefs.porte && prefs.porte !== "INDIFERENTE" && a.porte !== prefs.porte) return false;
+
+    // idade_minima / idade_maxima
+    if(prefs.idadeMin !== null && a.idade < prefs.idadeMin) return false;
+    if(prefs.idadeMax !== null && a.idade > prefs.idadeMax) return false;
+
+    // cor: busca parcial, case-insensitive
+    if(prefs.cor && !a.cor.toLowerCase().includes(prefs.cor.toLowerCase())) return false;
+
+    // raca: busca parcial, case-insensitive
+    if(prefs.raca && !a.raca.toLowerCase().includes(prefs.raca.toLowerCase())) return false;
+
+    return true;
+  });
+}
+
+function buscarMatch(){
+  // Validar espécie
+  const especieSel = document.querySelector('input[name="especie"]:checked');
+  if(!especieSel){
+    document.getElementById("err-especie").style.display = "block";
+    return;
+  }
+  document.getElementById("err-especie").style.display = "none";
+
+  const prefs = {
+    especie:  especieSel.value,
+    sexo:     document.querySelector('input[name="sexo"]:checked')?.value || "INDIFERENTE",
+    porte:    document.querySelector('input[name="porte"]:checked')?.value || "INDIFERENTE",
+    raca:     document.getElementById("c-raca").value.trim(),
+    cor:      document.getElementById("c-cor").value.trim(),
+    idadeMin: document.getElementById("c-idade-min").value !== "" ? parseInt(document.getElementById("c-idade-min").value) : null,
+    idadeMax: document.getElementById("c-idade-max").value !== "" ? parseInt(document.getElementById("c-idade-max").value) : null,
+  };
+
+  const resultado = matchAnimais(prefs);
+  const nome      = document.getElementById("c-nome").value.trim() || "Visitante";
+  const div       = document.getElementById("resultados");
+  const gridMatch = document.getElementById("grid-match");
+  const vazio     = document.getElementById("match-vazio");
+  const titulo    = document.getElementById("match-titulo");
+  const sub       = document.getElementById("match-sub");
+
+  div.style.display = "block";
+  div.scrollIntoView({ behavior:"smooth", block:"start" });
+
+  if(resultado.length === 0){
+    gridMatch.innerHTML = "";
+    vazio.style.display = "block";
+    titulo.textContent = "Nenhum animal encontrado";
+    sub.textContent = "Tente ajustar suas preferências.";
+  } else {
+    vazio.style.display = "none";
+    titulo.textContent = `${resultado.length} animal${resultado.length > 1 ? "is" : ""} compatível${resultado.length > 1 ? "is" : ""} para você, ${nome}!`;
+    sub.textContent = `Com base nas suas preferências, esses são os melhores matches disponíveis agora.`;
+    gridMatch.innerHTML = resultado.map(a => cardHTML(a, animais.indexOf(a))).join("");
+  }
+}
+
+// Máscaras simples
+document.getElementById("c-cpf").addEventListener("input", function(){
+  let v = this.value.replace(/\D/g,"");
+  if(v.length > 3)  v = v.slice(0,3) + "." + v.slice(3);
+  if(v.length > 7)  v = v.slice(0,7) + "." + v.slice(7);
+  if(v.length > 11) v = v.slice(0,11) + "-" + v.slice(11,13);
+  this.value = v;
+});
+document.getElementById("c-tel").addEventListener("input", function(){
+  let v = this.value.replace(/\D/g,"");
+  if(v.length > 0)  v = "(" + v;
+  if(v.length > 3)  v = v.slice(0,3) + ") " + v.slice(3);
+  if(v.length > 10) v = v.slice(0,10) + "-" + v.slice(10,14);
+  this.value = v;
+});
+
+// Init
 document.getElementById("stat-disp").textContent = animais.length;
 render();
 </script>
